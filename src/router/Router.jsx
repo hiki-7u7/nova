@@ -22,7 +22,7 @@ export const Router = () => {
         <Route path="/" element={<Home />} />
         <Route path="/iniciar-sesion" element={<FormInicio />} />
         <Route path="/registrar-usuario" element={<FormRegistro />} />
-        <Route path="/editar-curso" element={<FormEdit />} />
+        <Route path="/editar-curso/:id" element={<FormEdit />} />
       </Routes>
 
       <FormularioContacto />   

@@ -14,6 +14,7 @@ export const Buscador = () => {
                         partialCategory: filtroCategoria,
                     },
                 });
+                // console.log(response.data)
                 // setResultadosFiltrados(response.data);
                 setResultadosFiltrados([]);
             } catch (error) {

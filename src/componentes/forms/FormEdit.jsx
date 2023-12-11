@@ -1,21 +1,35 @@
+import axios from 'axios';
 import { useState } from 'react';
-
+import { useNavigate, useParams } from 'react-router-dom';
 
 export const FormEdit = () => {
-    const [showForm, setShowForm] = useState(false);
+    const params = useParams();
+    const navigate = useNavigate();
+    const [formValues, setFormValues] = useState({
+        category: '', 
+        description: '', 
+        image: '', 
+        price: '', 
+        name: ''
+    })
 
-    const handleOpen = () => {
-        setShowForm(true);
-    };
+    const handleChange = ({target}) => {
+        setFormValues({
+            ...formValues,
+            [target.name] : target.value
+        })
+    }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
-
-        setShowForm(false);
+        const { data } = await axios.put(`http://localhost:3000/api/products/${params.id}`, formValues)
+        console.log(data);
+        alert(data.message)
+        navigate('/')
     };
 
     const handleClose = () => {
-        setShowForm(false);
+        navigate('/')
     };
 
     return (
@@ -29,19 +43,19 @@ export const FormEdit = () => {
                             <img className="icon_close" src="/multimedia/close.svg" alt="" />
                         </span>
                         <div className="inputForm">
-                            <input type="text" placeholder="Categoría" name="category" />
+                            <input type="text" value={formValues.category} onChange={handleChange} placeholder="Categoría" name="category" required/>
                         </div>
                         <div className="inputForm">
-                            <input type="text" placeholder="Imagen" name="image" />
+                            <input type="text" value={formValues.image} onChange={handleChange} placeholder="Imagen" name="image" required/>
                         </div>
                         <div className="inputForm">
-                            <input type="text" placeholder="Descripción" name="description" />
+                            <input type="text" value={formValues.description} onChange={handleChange} placeholder="Descripción" name="description" required/>
                         </div>
                         <div className="inputForm">
-                            <input type="price" placeholder="Precio" name="price" />
+                            <input type="price" value={formValues.price} onChange={handleChange} placeholder="Precio" name="price" required/>
                         </div>
                         <div className="inputForm">
-                            <input type="text" placeholder="Titulo" name="title" />
+                            <input type="text" value={formValues.name} onChange={handleChange} placeholder="Titulo" name="name" required/>
                         </div>
                         <div className="inputForm">
                             <input type="submit" value="Enviar" />

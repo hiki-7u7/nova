@@ -12,10 +12,12 @@ export const NavBar = () => {
     return (
     <header>
         <nav className="container_nav" id="Incio">
-            <div className="container_logo">
-                <img width="50px" height="50px" className="img_log" src={coheteLogo} alt="Logo" />
-                <h4 className="text_logo">NOVA</h4>
-            </div>
+            <Link to={'/'}>
+                <div className="container_logo">
+                        <img width="50px" height="50px" className="img_log" src={coheteLogo} alt="Logo" />
+                        <h4 className="text_logo">NOVA</h4>
+                </div>
+            </Link>
 
             <ul className="container_list" id="container_list">
                 <li className="item_list  container_submenu">
